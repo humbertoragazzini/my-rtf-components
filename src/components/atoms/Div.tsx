@@ -9,7 +9,7 @@ type DivProps = ThreeElements['mesh'] & {
     opacity?: number;
 };
 
-const DivContext = createContext(null)
+export const DivContext = createContext(null)
 
 export const Div = ({
     width = 1,
@@ -22,7 +22,7 @@ export const Div = ({
 }: DivProps) => {
 
 
-  const value = useMemo(() => ({ width }), [width])
+    const value = useMemo(() => ({ width }), [width])
 
     return (
         <DivContext.Provider value={{ value }}>
