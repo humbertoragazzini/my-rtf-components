@@ -1,4 +1,5 @@
 import type { ThreeElements } from '@react-three/fiber';
+import { createContext, useMemo } from 'react';
 
 type DivProps = ThreeElements['mesh'] & {
     width?: number;
@@ -7,6 +8,8 @@ type DivProps = ThreeElements['mesh'] & {
     transparent?: boolean;
     opacity?: number;
 };
+
+const DivContext = createContext(null)
 
 export const Div = ({
     width = 1,
@@ -17,15 +20,21 @@ export const Div = ({
     children,
     ...props
 }: DivProps) => {
+
+
+  const value = useMemo(() => ({ width }), [width])
+
     return (
-        <mesh {...props}>
-            <planeGeometry args={[width, height]} />
-            <meshStandardMaterial
-                color={color}
-                transparent={transparent}
-                opacity={opacity}
-            />
-            {children}
-        </mesh>
+        <DivContext.Provider value={{ value }}>
+            <mesh {...props}>
+                <planeGeometry args={[width, height]} />
+                <meshStandardMaterial
+                    color={color}
+                    transparent={transparent}
+                    opacity={opacity}
+                />
+                {children}
+            </mesh>
+        </DivContext.Provider>
     );
 };
