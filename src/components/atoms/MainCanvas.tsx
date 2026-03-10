@@ -15,7 +15,7 @@ export const MainCanvas = ({ children }: MainCanvasProps) => {
             <CustomCamera />
             <CustomAmbientLight />
             <CustomDirectionalLight />
-            <CustomSpotLight />
+            {/* <CustomSpotLight /> */}
             {children}
         </Canvas>
     );

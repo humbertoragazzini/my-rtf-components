@@ -32,10 +32,16 @@ export const CustomDirectionalLight = ({
         showTarget: { value: false, label: 'Show Target Mesh' }
     });
 
-    useHelper(tweaks.showHelper && lightRef, DirectionalLightHelper, 1, tweaks.color);
+    // useHelper(tweaks.showHelper && lightRef, DirectionalLightHelper, 1, tweaks.color);
 
     return (
         <>
+            {/* Invisible Target Object that the light will point to */}
+            <mesh ref={targetRef as any} position={tweaks.lookAt} visible={tweaks.showTarget}>
+                <sphereGeometry args={[0.2, 16, 16]} />
+                <meshBasicMaterial color="yellow" wireframe />
+            </mesh>
+            {/* ligth */}
             <directionalLight
                 ref={lightRef}
                 intensity={tweaks.intensity}
@@ -43,11 +49,6 @@ export const CustomDirectionalLight = ({
                 position={tweaks.position}
                 target={targetRef.current}
             />
-            {/* Invisible Target Object that the light will point to */}
-            <mesh ref={targetRef as any} position={tweaks.lookAt} visible={tweaks.showTarget}>
-                <sphereGeometry args={[0.2, 16, 16]} />
-                <meshBasicMaterial color="yellow" wireframe />
-            </mesh>
         </>
     );
 };

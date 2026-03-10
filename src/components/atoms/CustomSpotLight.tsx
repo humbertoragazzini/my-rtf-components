@@ -41,7 +41,10 @@ export const CustomSpotLight = ({
         showTarget: { value: false, label: 'Show Target Mesh' }
     });
 
-    useHelper(tweaks.showHelper && lightRef, SpotLightHelper, tweaks.color);
+    // console.log(tweaks.showHelper)
+    // console.log(lightRef)
+
+    useHelper(tweaks.showHelper && lightRef.current, SpotLightHelper, tweaks.color);
 
     return (
         <>
