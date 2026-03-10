@@ -28,6 +28,12 @@ export const CustomCamera = ({
 
     const tweaks = useControls(name, {
         position: position,
+        translateX: { value: 0, min: -50, max: 50, step: 0.1 },
+        translateY: { value: 0, min: -50, max: 50, step: 0.1 },
+        translateZ: { value: 0, min: -50, max: 50, step: 0.1 },
+        rotationX: { value: 0, min: 0, max: 360, step: 1 },
+        rotationY: { value: 0, min: 0, max: 360, step: 1 },
+        rotationZ: { value: 0, min: 0, max: 360, step: 1 },
         lookAt: lookAt,
         fov: { value: fov, min: 10, max: 150, step: 1 },
         near: { value: near, min: 0.01, max: 10, step: 0.1 },
@@ -44,12 +50,25 @@ export const CustomCamera = ({
         }
     });
 
+    const finalPosition = [
+        tweaks.position[0] + tweaks.translateX,
+        tweaks.position[1] + tweaks.translateY,
+        tweaks.position[2] + tweaks.translateZ
+    ] as [number, number, number];
+
+    const finalRotation = [
+        THREE.MathUtils.degToRad(tweaks.rotationX),
+        THREE.MathUtils.degToRad(tweaks.rotationY),
+        THREE.MathUtils.degToRad(tweaks.rotationZ)
+    ] as [number, number, number];
+
     return (
         <>
             <PerspectiveCamera
                 ref={cameraRef}
                 makeDefault
-                position={tweaks.position}
+                position={finalPosition}
+                rotation={finalRotation}
                 fov={tweaks.fov}
                 near={tweaks.near}
                 far={tweaks.far}

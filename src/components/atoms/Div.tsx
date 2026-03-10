@@ -15,8 +15,8 @@ export const DivContext = createContext<any>(null)
 
 export const Div = ({
     name = 'Div',
-    width = 1,
-    height = 1,
+    width = 10,
+    height = 10,
     color = '#ffffff',
     transparent = false,
     opacity = 1,
