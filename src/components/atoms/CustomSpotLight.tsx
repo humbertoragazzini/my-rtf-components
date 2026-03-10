@@ -41,28 +41,30 @@ export const CustomSpotLight = ({
         showTarget: { value: false, label: 'Show Target Mesh' }
     });
 
-    // console.log(tweaks.showHelper)
-    // console.log(lightRef)
-
     useHelper(tweaks.showHelper && lightRef.current, SpotLightHelper, tweaks.color);
 
     return (
         <>
-            <spotLight
-                ref={lightRef}
-                intensity={tweaks.intensity}
-                color={tweaks.color}
-                position={tweaks.position}
-                angle={tweaks.angle}
-                penumbra={tweaks.penumbra}
-                distance={tweaks.distance}
-                target={targetRef.current}
-            />
+
+
             {/* Invisible Target Object that the spotlight points to */}
             <mesh ref={targetRef as any} position={tweaks.lookAt} visible={tweaks.showTarget}>
                 <sphereGeometry args={[0.2, 16, 16]} />
                 <meshBasicMaterial color="green" wireframe />
             </mesh>
+            {/* ligth */}
+            {
+                targetRef.current && <spotLight
+                        ref={lightRef}
+                        intensity={tweaks.intensity}
+                        color={tweaks.color}
+                        position={tweaks.position}
+                        angle={tweaks.angle}
+                        penumbra={tweaks.penumbra}
+                        distance={tweaks.distance}
+                        target={targetRef.current}
+                    />
+            }
         </>
     );
 };

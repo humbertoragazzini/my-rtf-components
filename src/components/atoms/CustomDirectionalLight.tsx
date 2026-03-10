@@ -42,13 +42,15 @@ export const CustomDirectionalLight = ({
                 <meshBasicMaterial color="yellow" wireframe />
             </mesh>
             {/* ligth */}
-            <directionalLight
-                ref={lightRef}
-                intensity={tweaks.intensity}
-                color={tweaks.color}
-                position={tweaks.position}
-                target={targetRef.current}
-            />
+            {
+                targetRef.current && <directionalLight
+                    ref={lightRef}
+                    intensity={tweaks.intensity}
+                    color={tweaks.color}
+                    position={tweaks.position}
+                    target={targetRef.current}
+                />
+            }
         </>
     );
 };
